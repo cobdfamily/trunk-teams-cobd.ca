@@ -1,6 +1,7 @@
 greeting: /audio/btn-greeting.wav
 prompt: /audio/btn-mainmenu.wav
 numDigits: 3
+timeout: 2
 options:
   '1': /extensions/123
   '9': /menus/bowen-island-community-services

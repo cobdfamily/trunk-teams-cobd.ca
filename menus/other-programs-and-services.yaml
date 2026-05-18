@@ -1,5 +1,6 @@
 prompt: /audio/other-programs-and-services.wav
 numDigits: 3
+timeout: 2
 options:
   '1': /menus/bowen-island-community-services?greeting=false
   '2': /menus/education?greeting=true

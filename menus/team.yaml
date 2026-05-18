@@ -1,5 +1,6 @@
 prompt: /audio/team.wav
 numDigits: 3
+timeout: 2
 options:
   '9': /menus/mainmenu
   '0': /extensions/100

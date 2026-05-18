@@ -1,5 +1,6 @@
 prompt: /audio/camps.wav
 numDigits: 3
+timeout: 2
 options:
   '1': /extensions/100
   '2': /extensions/100

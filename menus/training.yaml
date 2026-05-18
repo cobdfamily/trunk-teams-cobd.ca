@@ -1,5 +1,6 @@
 prompt: /audio/training.wav
 numDigits: 3
+timeout: 2
 options:
   '1': /extensions/100
   '9': /menus/mainmenu

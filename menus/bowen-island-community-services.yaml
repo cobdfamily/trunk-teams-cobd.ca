@@ -1,6 +1,7 @@
 greeting: /audio/abi-and-btn-greeting.wav
 prompt: /audio/bowen-island-community-services.wav
 numDigits: 3
+timeout: 2
 options:
   '1': /publications/bowen-island-undercurrent
   '2': /menus/abi-education?greeting=true

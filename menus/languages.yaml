@@ -1,5 +1,6 @@
 prompt: /audio/cobd-greeting.wav
 numDigits: 3
+timeout: 2
 options:
   '1': /menus/mainmenu
   '2': /documents/support-french
