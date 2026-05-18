@@ -1,8 +1,9 @@
 name: test
 
-# Boots the docker-compose stack (cobdfamily/trunk + cobdfamily/talkshow
-# from kibble.apps.blindhub.ca, with this checkout bind-mounted as
-# trunk's app_data tree) and runs the E2E tests at tests/test_e2e.py.
+# Boots the docker-compose stack (cobdfamily/trunk +
+# cobdfamily/talkshow from kibble.apps.blindhub.ca, with this
+# checkout bind-mounted at /app/data/teams/cobd.ca inside the
+# trunk container) and runs the E2E tests at tests/test_e2e.py.
 # The kibble registry speaks plain HTTP, so the runner's docker daemon
 # is reconfigured with kibble as an insecure-registry before pulling.
 

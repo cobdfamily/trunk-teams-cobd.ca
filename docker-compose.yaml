@@ -1,12 +1,17 @@
-# End-to-end test stack for the trunk-data tree.
+# End-to-end test stack for the trunk-teams-cobd.ca tree.
 #
-# Brings up the cobdfamily/trunk image with this repo bind-mounted
-# as its app_data root, plus a cobdfamily/talkshow alongside it.
-# The tests in tests/test_e2e.py walk the menu / extension /
-# audio paths through trunk to lock the rendered TwiML against
-# the live data tree.
+# Brings up the cobdfamily/trunk image with THIS REPO bind-
+# mounted at /app/data/teams/cobd.ca, plus a cobdfamily/talkshow
+# alongside it. The tests in tests/test_e2e.py walk the menu /
+# extension / audio paths through trunk to lock the rendered
+# TwiML against the live cobd.ca data tree.
 #
-# trunk-data references no publications and so does not call
+# Bind-mount path is the team's slot inside trunk's data tree --
+# NOT /app/data, which would shadow the trunk image's built-in
+# /app/data/templates (shared rendering templates baked in
+# since trunk v5.7.0).
+#
+# This repo references no publications and so does not call
 # talkshow during the menu / extension flow that the current
 # tests exercise. talkshow is included anyway so the stack
 # matches the production deploy shape and so a future test can
@@ -21,15 +26,19 @@
 services:
   trunk:
     image: kibble.apps.blindhub.ca/cobdfamily/trunk:${TRUNK_TAG:-latest}
-    container_name: trunk-data-trunk
+    container_name: trunk-teams-cobd-ca-trunk
     ports:
       - "${TRUNK_HTTP_PORT:-1962}:1962"
     environment:
       TRUNK_CONFIG: /app/config.yaml
     volumes:
-      # The repo root is the app_data tree. Read-only — trunk
-      # never writes here.
-      - ./:/app/data:ro
+      # One repo == one team. Mount the repo root at
+      # /app/data/teams/cobd.ca so the trunk image's baked-in
+      # /app/data/templates (shared rendering templates,
+      # shipped inside the trunk image since v5.7.0) stays
+      # visible -- a whole-/app/data mount would shadow it.
+      # Read-only -- trunk never writes here.
+      - ./:/app/data/teams/cobd.ca:ro
       - ./tests/trunk-config.yaml:/app/config.yaml:ro
     healthcheck:
       test:
@@ -45,7 +54,7 @@ services:
 
   talkshow:
     image: kibble.apps.blindhub.ca/cobdfamily/talkshow:${TALKSHOW_TAG:-latest}
-    container_name: trunk-data-talkshow
+    container_name: trunk-teams-cobd-ca-talkshow
     ports:
       - "${TALKSHOW_HTTP_PORT:-8001}:8000"
     environment:

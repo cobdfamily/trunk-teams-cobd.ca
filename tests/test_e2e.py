@@ -1,15 +1,15 @@
-"""End-to-end tests for the trunk-data tree.
+"""End-to-end tests for the trunk-teams-cobd.ca tree.
 
-Assumes the docker-compose stack at the repo root is up — trunk
-serving from this checkout (bind-mounted at /app/data) and a
-talkshow alongside it (unused by the current paths but present
-for the production-shape stack).
+Assumes the docker-compose stack at the repo root is up -- trunk
+serving from this checkout (bind-mounted at
+/app/data/teams/cobd.ca) and a talkshow alongside it (unused
+by the current paths but present for the production-shape stack).
 
 The tests walk the menu / extension / audio paths Twilio actually
-hits, verify the rendered TwiML, and lock the trunk-data templates
-against the regression that bit production earlier
-(``{{ data.. }}`` from a stale trunk-migrate run breaking every
-extension call). Run inside CI via .github/workflows/test.yml.
+hits, verify the rendered TwiML, and lock the data tree against
+the regression that bit production earlier (``{{ data.. }}``
+from a stale trunk-migrate run breaking every extension call).
+Run inside CI via .github/workflows/test.yml.
 """
 
 from __future__ import annotations
@@ -74,7 +74,7 @@ def test_trunk_liveness():
 
 def test_talkshow_liveness():
     """Talkshow is in the compose for production-shape parity even
-    though the current trunk-data tree doesn't reference it. This
+    though the current cobd.ca tree doesn't reference it. This
     test is a smoke check that the image still boots with stub
     Azure credentials. Skips if the host port isn't bound."""
     try:
@@ -128,8 +128,8 @@ def test_mainmenu_with_invalid_digit_replays_gather():
 
 def test_mainmenu_routes_extension_digit_to_extension():
     """Pressing 5 on mainmenu goes to /extensions/100 per
-    teams/cobd.ca/menus/mainmenu.yaml. Verify the response is a
-    Redirect to the matching path."""
+    menus/mainmenu.yaml. Verify the response is a Redirect to
+    the matching path."""
     r = _post("/v1/teams/cobd.ca/menus/mainmenu", Digits="5")
     assert r.status_code == 200
     assert "<Redirect" in r.text

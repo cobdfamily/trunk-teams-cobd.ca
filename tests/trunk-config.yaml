@@ -1,14 +1,17 @@
-# Test config for the trunk-data E2E suite.
+# Test config for the trunk-teams-cobd.ca E2E suite.
 #
-# Points trunk at the bind-mounted data tree (which is the repo
-# root) and disables the request-log middleware so test output
-# stays readable.
+# Trunk reads /app/data as its data root. docker-compose
+# layers THIS repo's contents into /app/data/teams/cobd.ca,
+# while the trunk image's built-in /app/data/templates
+# (shipped since trunk v5.7.0) stays visible -- the mount
+# target is the team slot, NOT /app/data, so no shadowing.
+# Request-log middleware is off so test output stays readable.
 
 server:
   host: 0.0.0.0
   port: 1962
 
-# Set by docker-compose to /app/data (the repo root mount).
+# Trunk's data root inside the container.
 app_data: /app/data
 
 # Empty -> trunk falls through to the request's own scheme + host

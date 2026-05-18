@@ -19,12 +19,16 @@
 # profile.yaml (legacy shape) -- profile-level values win.
 pbx:
   # SignalWire-hosted PBX endpoint that cobd.ca's calls route to.
-  # Format: <user>@<workspace>.sip.signalwire.com (no leading
-  # `sip:` -- the Twilio <Sip> verb prepends it).
+  # Format: <user>@<workspace>.sip.signalwire.com. Emitted
+  # verbatim into <Sip> -- include a leading `sip:` if your
+  # upstream needs the scheme (SignalWire accepts the bare form).
   sip_target: french-bulldog@campboweninnovations-33be1347ee70.sip.signalwire.com
-  # Optional hold-audio while Twilio bridges the call to the PBX.
-  # `/audio/foo.wav` -> base_url-relative; bare filename ->
-  # /audio/<file>; absolute http(s) URL -> emit verbatim.
-  hold_audio: https://phone.apps.blindhub.ca/teams/general/audio/hold.wav
+  # Hold audio served from this team's own audio/ dir.
+  # `/audio/foo.wav` -> resolves under the team's base_url at
+  # /v1/teams/cobd.ca/audio/hold.wav. Previously cross-team-
+  # pointed at /teams/general/audio/hold.wav, which became a 404
+  # when the `general` team was retired in the repo rename to
+  # trunk-teams-cobd.ca.
+  hold_audio: /audio/hold.wav
   # Dial timeout in seconds; defaults to 45 if omitted.
   timeout: 45
