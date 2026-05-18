@@ -1,0 +1,60 @@
+# Bowen Island Undercurrent — Glacier Media small-paper RSS feeds.
+#
+# back_url: where pressing 0 in the publication menu sends the
+# caller. Relative paths resolve under the team's /v1 root.
+# Points back at the local Bowen-services menu (the publication
+# is reached from that menu, so "back" should return there
+# rather than the team's top-level mainmenu).
+#
+# talkshow_base_url: where trunk hits /v1/queue and where the TwiML
+# <Play> tags reach for /v1/speak and /v1/cache. Must be reachable
+# from BOTH the trunk container (server-to-server queue calls) and
+# from Twilio's network (Play targets), so this is the public
+# hostname, not a Docker-internal one.
+#
+# hold_audio / unavailable_audio: relative paths under the team's
+# audio tree. Resolved against base_url at TwiML render time.
+#
+# categories order matters — the publication menu reads them
+# "Press 1 for X, Press 2 for Y, ..." in declared order.
+name: "Bowen Island Undercurrent"
+back_url: /menus/bowen-island-community-services
+talkshow_base_url: https://newsline.apps.blindhub.ca
+hold_audio: /audio/hold.wav
+unavailable_audio: /audio/unavailable.wav
+
+# Gather timeout (seconds). LAML's only DTMF timeout — applied
+# to every Gather rendered for this publication (menu, header,
+# body). Defaults match what the templates use when this field
+# is omitted: 5s on the publication menu and the story header,
+# 2s on the body view.
+#
+# timeout: 5
+categories:
+  - title: "Top Stories"
+    slug: top_stories
+    feed_url: https://www.bowenislandundercurrent.com/rss
+  - title: "Local News"
+    slug: local_news
+    feed_url: https://www.bowenislandundercurrent.com/rss/local-news
+  - title: "In the Community"
+    slug: in_the_community
+    feed_url: https://www.bowenislandundercurrent.com/rss/in-the-community
+  - title: "BC News"
+    slug: bc_news
+    feed_url: https://www.bowenislandundercurrent.com/rss/bc-news
+  - title: "National News"
+    slug: national_news
+    feed_url: https://www.bowenislandundercurrent.com/rss/national-news
+  - title: "World News"
+    slug: world_news
+    feed_url: https://www.bowenislandundercurrent.com/rss/world-news
+  - title: "The Mix"
+    slug: the_mix
+    feed_url: https://www.bowenislandundercurrent.com/rss/the-mix
+  - title: "Local Arts"
+    slug: local_arts
+    feed_url: https://www.bowenislandundercurrent.com/rss/local-arts
+  - title: "The Opinion Section"
+    slug: opinion
+    feed_url: https://www.bowenislandundercurrent.com/rss/opinion
