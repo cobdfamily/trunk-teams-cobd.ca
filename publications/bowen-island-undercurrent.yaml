@@ -27,6 +27,12 @@ talkshow_base_url: https://newsline.apps.blindhub.ca
 hold_audio: /audio/hold.wav
 unavailable_audio: /audio/unavailable.wav
 
+# Plays ONCE before the publication menu's <Gather> on a
+# fresh hit (suppressed on invalid-digit retries and when
+# the request carries ?greeting=false, e.g. when arriving
+# via a Redirect from a menu that already played a welcome).
+greeting: /audio/undercurrent-greeting.wav
+
 # Gather timeout (seconds). LAML's only DTMF timeout — applied
 # to every Gather rendered for this publication (menu, header,
 # body). Defaults match what the templates use when this field
