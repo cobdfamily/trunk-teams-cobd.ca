@@ -1,0 +1,30 @@
+# Team-level config for cobd.ca.
+#
+# Two unrelated sections live here:
+#
+#   pbx:        Where dial.pbx extensions (in
+#               extensions/<n>/profile.yaml) end up.
+#   signature_verification:
+#               Twilio / SignalWire request-signature checks
+#               (see trunk's signature.py for the full shape).
+#
+# Trunk reads this file lazily on each request; edits land on
+# the next call without a restart.
+
+# Where calls go after a dial.pbx mapping resolves. The route
+# overlays these onto each extension's profile so the template
+# renders one <Sip>{sip_target}?x-extension=<n>&...</Sip> per
+# entry in dial.pbx. Operators can still override per-extension
+# by putting `sip:`, `hold_audio:`, or `timeout:` directly on
+# profile.yaml (legacy shape) -- profile-level values win.
+pbx:
+  # SignalWire-hosted PBX endpoint that cobd.ca's calls route to.
+  # Format: <user>@<workspace>.sip.signalwire.com (no leading
+  # `sip:` -- the Twilio <Sip> verb prepends it).
+  sip_target: french-bulldog@campboweninnovations-33be1347ee70.sip.signalwire.com
+  # Optional hold-audio while Twilio bridges the call to the PBX.
+  # `/audio/foo.wav` -> base_url-relative; bare filename ->
+  # /audio/<file>; absolute http(s) URL -> emit verbatim.
+  hold_audio: https://phone.apps.blindhub.ca/teams/general/audio/hold.wav
+  # Dial timeout in seconds; defaults to 45 if omitted.
+  timeout: 45
