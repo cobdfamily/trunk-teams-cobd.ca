@@ -3,23 +3,40 @@
 [![test](https://github.com/cobdfamily/trunk-data/actions/workflows/test.yml/badge.svg)](https://github.com/cobdfamily/trunk-data/actions/workflows/test.yml)
 
 Per-team production data for `cobdfamily/trunk` — menus,
-extensions, documents, audio prompts, and shared Jinja2
-templates. The `trunk` deploy host clones this repo and
-bind-mounts it as `/app/data` inside the trunk container.
+extensions, documents, audio prompts. The `trunk` deploy
+host clones this repo and bind-mounts its `teams/` subdir
+at `/app/data/teams` inside the trunk container. **Not**
+mounted at `/app/data` — the shared rendering templates
+ship inside the trunk image at `/app/data/templates` and
+a whole-data bind would shadow them. See trunk's
+[DEPLOYMENT.md](https://github.com/cobdfamily/trunk/blob/main/DEPLOYMENT.md)
+for the bind-mount example.
 
 ```
-layouts/                 layout templates wrapping every render
-templates/               shared menu / extension / error templates
 teams/<team>/
-  team.yaml              optional, per-team settings (signature
-                         verification, ...)
+  team.yaml              optional, per-team settings
+                         (signature_verification, pbx)
   menus/<name>.yaml      Twilio Gather config
-  extensions/<n>/        per-extension profile + audio prompts
-    profile.yaml
+  extensions/<n>/        per-extension profile + audio
+    profile.yaml         alias | dial.pbx | legacy sip
     audio/<file>
   documents/<name>.xml.j2
   audio/<file>
 ```
+
+## Schema
+
+The canonical reference for every YAML field in this tree
+lives in the trunk repo at
+[`SCHEMA.md`](https://github.com/cobdfamily/trunk/blob/main/SCHEMA.md).
+Read it before adding or editing files here -- it lists
+every required / optional / defaulted field with notes on
+audio-path heuristics and the three extension profile
+shapes.
+
+This repo tracks `main`; schema versions are pinned to
+trunk releases (a trunk minor-bump that touches a schema
+shape always documents the change in `SCHEMA.md` first).
 
 ## End-to-end tests
 
