@@ -19,6 +19,10 @@
 # "Press 1 for X, Press 2 for Y, ..." in declared order.
 name: "Bowen Island Undercurrent"
 back_url: /menus/bowen-island-community-services
+# v5.7.10: an explainer recording for first-time callers
+# takes the "press 1" slot; categories shift down so
+# top-stories becomes press 2, local-news press 3, etc.
+tutorial_url: /documents/undercurrent-tutorial
 talkshow_base_url: https://newsline.apps.blindhub.ca
 hold_audio: /audio/hold.wav
 unavailable_audio: /audio/unavailable.wav
