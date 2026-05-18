@@ -2,7 +2,7 @@ greeting: /audio/abi-and-btn-greeting.wav
 prompt: /audio/bowen-island-community-services.wav
 numDigits: 3
 options:
-  '1': /menus/undercurrent-mainmenu?greeting=true
+  '1': /publications/bowen-island-undercurrent
   '2': /menus/abi-education?greeting=true
   '3': /extensions/123
   '4': /extensions/102
