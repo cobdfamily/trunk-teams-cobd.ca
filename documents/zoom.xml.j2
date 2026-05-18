@@ -1,6 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Response>
 {% if not data.call.callout %}
 <Play method="GET">{{ data.base_url }}/audio/zoom.aiff</Play>
 {% endif %}
 <Dial>
 <Number sendDigits="ww{{ data.call.room }}#ww#">14388097799</Number>
 </Dial>
+</Response>

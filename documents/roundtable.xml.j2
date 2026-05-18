@@ -1,6 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Response>
 {% if data.call.callout %}
 <Say>Hello... This is an automated call from the Canadian Organization of the Blind and DeafBlind's {{ data.call.callout }}. You will be automatically connected to the conference call now.</Say>
 {% else %}
 <Play method="GET">{{ data.base_url }}/audio/conferences.aiff</Play>
 {% endif %}
 <Redirect>{{ data.base_url }}/documents/zoom?room=2157551065{% if data.call.callout %}&amp;callout=true{% endif %}</Redirect>
+</Response>
