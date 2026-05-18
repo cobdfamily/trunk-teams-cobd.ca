@@ -3,7 +3,10 @@ numDigits: 3
 options:
   '1': /menus/camps
   '2': /menus/training
-  '3': /menus/blindhub
+  # blindhub split off into cobdfamily/trunk-teams-blindhub.ca.
+  # Cross-tenant absolute URL back to that team slot on the
+  # same trunk instance.
+  '3': https://phone.apps.blindhub.ca/v1/teams/blindhub.ca/menus/mainmenu
   '4': /menus/other-programs-and-services
   '5': /extensions/100
   '6': /extensions/100

@@ -1,8 +1,0 @@
-prompt: /audio/blindhub-greeting.wav
-numDigits: 3
-options:
-  '1': /documents/bh-en-coming-soon
-  '2': /documents/support-french
-  '3': /extensions/052
-  '9': /menus/mainmenu
-  '0': /extensions/100
