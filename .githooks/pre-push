@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+# Pre-push gate: validate every YAML in this repo against
+# trunk's schema before the push reaches the remote.
+# Catches operator typos (misspelled keys, wrong types,
+# malformed options dicts, etc.) in seconds instead of
+# discovering them when a real call hits the broken
+# menu/extension/publication.
+#
+# Activate once per clone:
+#
+#     git config core.hooksPath .githooks
+#
+# Emergency override (use sparingly):
+#
+#     SKIP_VALIDATE=1 git push
+#
+# Locating cobd-cli: by default we expect it as a sibling
+# directory under Microservices/. Override with the
+# COBD_CLI env var for non-standard layouts. If cobd-cli
+# isn't on disk at all, the hook skips with a hint --
+# pre-push stays advisory until the operator has the
+# tool installed.
+
+set -euo pipefail
+
+if [ "${SKIP_VALIDATE:-0}" = "1" ]; then
+  echo "[pre-push] SKIP_VALIDATE=1 -- skipping schema check."
+  exit 0
+fi
+
+REPO_ROOT="$(git rev-parse --show-toplevel)"
+COBD_CLI="${COBD_CLI:-$REPO_ROOT/../cobd-cli}"
+
+if [ ! -f "$COBD_CLI/bin/cobd.js" ]; then
+  echo "[pre-push] cobd-cli not found at $COBD_CLI -- skipping schema check"
+  echo "           (clone cobdfamily/cobd-cli as a sibling, or set COBD_CLI)"
+  exit 0
+fi
+
+echo "[pre-push] cobd validate ..."
+node "$COBD_CLI/bin/cobd.js" validate "$REPO_ROOT"
