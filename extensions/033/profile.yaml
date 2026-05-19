@@ -1,0 +1,7 @@
+# French-language operator. Dialled from blindhub.ca's
+# mainmenu.fr (press 0) via the team_extensions_base_url
+# fallback -- blindhub has no local profile for 033, so
+# its extension route 302s here.
+dial:
+  pbx:
+  - '033'
