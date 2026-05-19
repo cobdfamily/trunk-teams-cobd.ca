@@ -1,0 +1,45 @@
+# Bowen Island Municipality -- WordPress RSS feeds.
+#
+# Source: https://bowenislandmunicipality.ca/ . WordPress
+# auto-generates a feed per category at
+# /category/<slug>/feed/. Confirmed working as of May 2026.
+#
+# back_url: where pressing 0 in the publication menu sends the
+# caller. Returns to the bowen-services menu since this
+# publication is reached from there.
+#
+# talkshow_base_url: shared with the Undercurrent. Newsline
+# is a generic RSS reader -- no per-source parser required.
+#
+# hold_audio / unavailable_audio: shared with the Undercurrent.
+# Same team audio tree.
+#
+# No greeting / tutorial set -- add the WAVs to audio/ first
+# (e.g. /audio/municipality-greeting.wav,
+# /audio/municipality-tutorial.wav) then drop the field +
+# tutorial_url here when ready.
+#
+# categories order matters -- the publication menu reads them
+# "Press 1 for X, Press 2 for Y, ..." in declared order.
+name: "Bowen Island Municipality"
+back_url: /menus/bowen-island-community-services
+talkshow_base_url: https://newsline.apps.blindhub.ca
+hold_audio: /audio/hold.wav
+unavailable_audio: /audio/unavailable.wav
+
+categories:
+  - title: "News"
+    slug: news
+    feed_url: https://bowenislandmunicipality.ca/category/news/feed/
+  - title: "Notices"
+    slug: notices
+    feed_url: https://bowenislandmunicipality.ca/category/notices/feed/
+  - title: "Planning Notices"
+    slug: planning_notices
+    feed_url: https://bowenislandmunicipality.ca/category/notices/planning-notices/feed/
+  - title: "Jobs"
+    slug: jobs
+    feed_url: https://bowenislandmunicipality.ca/category/jobs/feed/
+  - title: "Discussions"
+    slug: discussions
+    feed_url: https://bowenislandmunicipality.ca/category/discussions/feed/
