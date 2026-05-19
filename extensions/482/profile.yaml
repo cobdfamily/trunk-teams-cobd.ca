@@ -1,0 +1,14 @@
+# Extension 482 -- "dial into blindhub.ca".
+#
+# Not a real SIP destination. trunk v5.7.22's redirect_url
+# field 302s the caller to blindhub.ca's language selector
+# menu (which then leads to the English / French flows). The
+# blindhub.ca tenant lives on the same trunk container at
+# /v1/teams/blindhub.ca; the absolute URL keeps the
+# destination obvious to anyone reading this file.
+#
+# Twilio follows the 302, fetches the languages menu, plays
+# the prompt + Gather inside that team's slot -- the caller
+# gets the full menu experience including greetings, not a
+# fast-forward shortcut.
+redirect_url: https://phone.apps.blindhub.ca/v1/teams/blindhub.ca/menus/languages
