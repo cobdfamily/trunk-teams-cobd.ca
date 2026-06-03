@@ -51,8 +51,9 @@ sudo git clone https://github.com/cobdfamily/trunk-teams-cobd.ca \
      /opt/trunk-teams-cobd.ca
 ```
 
-Edits land on the next request -- trunk has no cache. To
-sync new content from this repo:
+Edits land on the next request -- trunk mtime-caches each
+file, so a changed file is re-read automatically (no
+restart). To sync new content from this repo:
 
 ```sh
 cd /opt/trunk-teams-cobd.ca && git pull
